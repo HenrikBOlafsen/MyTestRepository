@@ -1,16 +1,191 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Test page</title>
-  <style>
-    body {
-    background-color: #b0fff4;
-    }
-  </style>
+    <title>HenrikBOlafsen</title>
+    <style>
+        /* DarkBlue: #140F1C Gold: #D4A539 (#D6992B) BrightPink: #FAF2C4 yellow: #FAEC4A red: #FA5745 */
+        body {
+            background-color: #140F1C;
+            color: white;
+            font-family: sans-serif;
+        }
+        #titleDiv {
+            text-align: center;
+            word-wrap: break-word;
+        }
+        #title {
+            color: #FFB833;
+        }
+        #titleEffect {
+            position: absolute;
+            top: 0px;
+            right: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+        #fill {
+            background-color: #FA5745;
+            position:absolute;
+            top: 100px;
+            width: 100%;
+            height: 200px;
+            z-index: -2;
+            box-shadow: 0px 0px 20px 20px #FA5745;
+        }
+        button {
+            border-width: 5px;
+            border-radius: 7px;
+            box-shadow: 0 10px 13px 0 rgba(0,0,0,0.8), 0 10px 15px 0 rgba(0,0,0,0.9);
+            padding: 20px 32px;
+            text-align: center;
+            font-size:medium;
+            border-color: #FAF2C4;
+            background-color: #ffffff00;
+            color: white;
+        }
+        button:hover {
+            border-color: rgb(196, 186, 132);
+        }
+        #arrow {
+            margin-top: 10px;
+            height: 40px;
+            animation-name: levitate;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-timing-function: ease-in-out;
+        }
+        #centerDiv {
+            position: absolute;
+            margin: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+        }
+        .txtYellow {
+            color: #FFB833;
+        }
+        #myProjects {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+        .project {
+            margin: 20px;
+            width: 250px;
+            height: 250px;
+            background-color: #FFB833;
+        }
+        .projectImg {
+            width: 96%;
+            height: 96%;
+            margin-left: 2%;
+            margin-right: 2%;
+            margin-top: 2%;
+            margin-bottom: 2%;
+        }
+        #projectDiv {
+            text-align: center;
+        }
+        #projectText {
+            width: 80%;
+            margin: auto;
+            background-color: rgba(105, 105, 105, 0.322);
+            padding: 5px 0 5px 0;
+            font-size: larger;
+            font-weight: bold;
+            position: relative;
+            color: black;
+            top: -85%;
+            box-shadow: 0 10px 13px 0 rgba(0,0,0,0.8), 0 10px 15px 0 rgba(0,0,0,0.9);
+        }
+        .btnReadMore {
+            position: relative;
+            top: -65%;
+            padding: 10px 22px;
+            background-color: #140f1cd5;
+            border-width: 3px;
+        }
+        .btnReadMore:hover {
+            opacity: 1;
+        }
+        @keyframes levitate {
+            from{
+                transform: translate(0px, 10px); 
+            }
+            to{
+                transform: translate(0px, -10px);
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>My test page</h1>
+    <div id="titleEffect">
+        <img src="titleBackgroundMask.png" id="titleBackgroundMask">
+        <div id="fill"></div>
+    </div>
+    <div id="titleDiv">
+        <div id="centerDiv"> 
+            <h1 id="title">Henrik B. Olafsen</h1>
+            <hr style="width: 40%;">
+            <h3>I'm a curiosity driven software developer and I have experience with <span class="txtYellow">C#, Javascript and Python</span></h3>
+            <p>I am especially interested in machine learning and all the possibilites that comes with deep neural networks</p>
+            <br>
+            <button id="btnProjects">Check out some of my projects</button>
+            <br>
+            <img src="arrowDown.png" id="arrow" style="margin-top: 20px; height: 60px;">
+        </div>
+    </div>
+    <hr style="margin: 0px;">
+    <div id="projectDiv">
+        <h2>Some of my projects:</h2>
+        <div id="myProjects">
+            <div class="project"><img src="project1.png" class="projectImg"><p id="projectText">Space Warper</p><button class="btnReadMore">Read More</button></div>
+            <div class="project"><img src="project2.png" class="projectImg"><p id="projectText">Fingers Down</p></div>
+            <div class="project"><img src="project3.png" class="projectImg"><p id="projectText">Hamiltonian Path Algorithm</p></div>
+            <div class="project"><img src="project4.png" class="projectImg"><p id="projectText">Find the best move in any complete game tree</p></div>
+        </div></div>
+    <script>
+        var titleBackgroundMask = document.getElementById("titleBackgroundMask");
+        var titleDiv = document.getElementById("titleDiv");
+        var titleEffect = document.getElementById("titleEffect");
+        var btnProjects = document.getElementById("btnProjects");
+        var fill = document.getElementById("fill");
+        fill.animate([
+            // keyframes
+            { transform: "translateY(" + (-fill.offsetHeight*2) + "px)" },
+            { transform: "translateY(" + screen.height + "px)" }
+            ], {
+            // timing options
+            duration: 8000,
+            iterations: Infinity
+        });
+        titleBackgroundMask.style.height = window.innerHeight + "px";
+        titleDiv.style.height = (window.innerHeight - titleDiv.offsetTop) + "px";
+        titleEffect.style.height = window.innerHeight + "px";
 
-  <p>This is a test</p>
+        btnProjects.onclick = function() {
+            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+        }
+
+        var projects = document.getElementsByClassName("project");
+        for(var i = 0; i < projects.length; i++) {
+            var rotation = Math.random()*20 - 10;
+            projects[i].animate([
+                // keyframes
+                { transform: "translateY(7px) rotate(" + rotation + "deg)" },
+                { transform: "translateY(-7px) rotate(" + rotation + "deg)" }
+                ], {
+                // timing options
+                duration: 2000,
+                iterations: Infinity,
+                direction: "alternate",
+                delay: (Math.random()*-2000),
+                easing: "ease-in-out"
+            });
+        }
+    </script>
 </body>
 </html>
