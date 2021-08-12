@@ -3,11 +3,12 @@
 <head>
     <title>HenrikBOlafsen</title>
     <style>
-        /* DarkBlue: #140F1C Gold: #D4A539 (#D6992B) BrightPink: #FAF2C4 yellow: #FAEC4A red: #FA5745 */
+        /* DarkBlue: #140F1C Gold: #D4A539 (#D6992B) BrightYellow: #FAF2C4 yellow: #FAEC4A red: #FA5745 */
         body {
             background-color: #140F1C;
             color: white;
             font-family: sans-serif;
+            margin: 0px;
         }
         #titleDiv {
             text-align: center;
@@ -15,6 +16,8 @@
         }
         #title {
             color: #FFB833;
+            font-size: 44px;
+            text-shadow: 9px 9px 14px #000;
         }
         #titleEffect {
             position: absolute;
@@ -22,11 +25,12 @@
             right: 0;
             z-index: -1;
             overflow: hidden;
+            user-select: none;
         }
         #fill {
             background-color: #FA5745;
             position:absolute;
-            top: 100px;
+            top: 0px;
             width: 100%;
             height: 200px;
             z-index: -2;
@@ -36,7 +40,7 @@
             border-width: 5px;
             border-radius: 7px;
             box-shadow: 0 10px 13px 0 rgba(0,0,0,0.8), 0 10px 15px 0 rgba(0,0,0,0.9);
-            padding: 20px 32px;
+            padding: 15px 32px;
             text-align: center;
             font-size:medium;
             border-color: #FAF2C4;
@@ -73,10 +77,11 @@
             justify-content: space-evenly;
         }
         .project {
-            margin: 20px;
-            width: 250px;
-            height: 250px;
+            margin: 40px;
+            width: 350px;
+            height: 350px;
             background-color: #FFB833;
+            box-shadow: 0 10px 13px 0 rgba(0,0,0,0.8), 0 10px 15px 0 rgba(0,0,0,0.9);
         }
         .projectImg {
             width: 96%;
@@ -92,9 +97,9 @@
         #projectText {
             width: 80%;
             margin: auto;
-            background-color: rgba(105, 105, 105, 0.322);
+            background-color: rgba(205, 205, 205, 0.822);
             padding: 5px 0 5px 0;
-            font-size: larger;
+            font-size: x-large;
             font-weight: bold;
             position: relative;
             color: black;
@@ -107,9 +112,46 @@
             padding: 10px 22px;
             background-color: #140f1cd5;
             border-width: 3px;
+            font-size: larger;
         }
         .btnReadMore:hover {
             opacity: 1;
+        }
+        #contactMeDiv{
+            text-align: center;
+        }
+        #aboutMeDiv{
+            margin-left: 10%;
+            margin-bottom: 30px;
+        }
+        #aboutMeText {
+            width: 70%;
+            margin-bottom: 50px;
+        }
+        #backgroundGrey {
+            position: absolute;
+            background-color: #181818;
+            width: 100%;
+            z-index: -1;
+            margin: 0px;
+            border: none;
+        }
+        #readMoreDiv {
+            text-align: left;
+            position: absolute;
+            width: 100%;
+            background-color: #636363;
+            z-index: 1;
+        }
+        #readMoreText {
+            width: 70%;
+            margin-left: 10%;
+        }
+        .btnCloseReadMore {
+            margin-left: 45%;
+        }
+        #projectDiv {
+            margin-bottom: 30px;
         }
         @keyframes levitate {
             from{
@@ -123,43 +165,62 @@
 </head>
 <body>
     <div id="titleEffect">
-        <img src="titleBackgroundMask.png" id="titleBackgroundMask">
+        <img src="titleEffectMask.svg" id="titleBackgroundMask">
         <div id="fill"></div>
     </div>
     <div id="titleDiv">
         <div id="centerDiv"> 
             <h1 id="title">Henrik B. Olafsen</h1>
             <hr style="width: 40%;">
-            <h3>I'm a curiosity driven software developer and I have experience with <span class="txtYellow">C#, Javascript and Python</span></h3>
-            <p>I am especially interested in machine learning and all the possibilites that comes with deep neural networks</p>
+            <h2>I'm a curiosity driven software developer and I have experience with <span class="txtYellow">C#, Javascript and Python</span></h2>
+            <h3>I am especially interested in machine learning and all the possibilites that comes with deep neural networks</h3>
             <br>
-            <button id="btnProjects">Check out some of my projects</button>
+            <button id="btnProjects"><h3>Check out some of my projects</h3></button>
             <br>
             <img src="arrowDown.png" id="arrow" style="margin-top: 20px; height: 60px;">
         </div>
     </div>
     <hr style="margin: 0px;">
+    <div id="backgroundGrey"></div>
     <div id="projectDiv">
-        <h2>Some of my projects:</h2>
+        <div id="readMoreDiv"><h2 id="readMoreText"></h2><button class="btnCloseReadMore" onclick="closeReadMore()">Back</button></div>
+        <h1>Some of my projects:</h1>
         <div id="myProjects">
-            <div class="project"><img src="project1.png" class="projectImg"><p id="projectText">Space Warper</p><button class="btnReadMore">Read More</button></div>
-            <div class="project"><img src="project2.png" class="projectImg"><p id="projectText">Fingers Down</p></div>
-            <div class="project"><img src="project3.png" class="projectImg"><p id="projectText">Hamiltonian Path Algorithm</p></div>
-            <div class="project"><img src="project4.png" class="projectImg"><p id="projectText">Find the best move in any complete game tree</p></div>
-        </div></div>
+            <div class="project"><img src="projectImgs/projectImg1.png" class="projectImg"><p id="projectText">Hamiltonian Path Algorithm</p><button class="btnReadMore" onclick="readMore(0)">Read More</button></div>
+            <div class="project"><img src="projectImgs/projectImg2.png" class="projectImg"><p id="projectText">Space Warper</p><button class="btnReadMore" onclick="readMore(1)">Read More</button></div>
+            <div class="project"><img src="projectImgs/projectImg3.png" class="projectImg"><p id="projectText">Fingers Down</p><button class="btnReadMore" onclick="readMore(2)">Read More</button></div>
+            <div class="project"><img src="projectImgs/projectImg4.png" class="projectImg"><p id="projectText">Find the best move in any complete game tree</p><button class="btnReadMore" onclick="readMore(3)">Read More</button></div>
+            <!--<div class="project"><img src="projectImgs/projectImg5.png" class="projectImg"><p id="projectText">Train Deep Neural Network with genetic algorithm</p><button class="btnReadMore" onclick="readMore(3)">Read More</button></div>-->
+        </div>
+    </div>
+    <hr>
+    <div id="aboutMeDiv">
+        <h1>About Me:</h1>
+        <h2 id="aboutMeText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Urna duis convallis convallis tellus id interdum. Netus et malesuada fames ac turpis egestas maecenas pharetra. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien. Pretium nibh ipsum consequat nisl vel pretium lectus quam id. Massa vitae tortor condimentum lacinia quis vel eros donec ac. Nam libero justo laoreet sit amet cursus sit amet dictum. Sodales ut eu sem integer vitae justo. Lectus quam id leo in vitae turpis. Risus quis varius quam quisque id.</h2>
+    </div>
+    <hr>
+    <div id="contactMeDiv">
+        <h2>Contact Me:</h2>
+        <h1>olafsenhenrikb@gmail.com</h1>
+    </div>
+    <hr style="width: 25%; margin-bottom: 60px;">
     <script>
         var titleBackgroundMask = document.getElementById("titleBackgroundMask");
         var titleDiv = document.getElementById("titleDiv");
         var titleEffect = document.getElementById("titleEffect");
         var btnProjects = document.getElementById("btnProjects");
         var fill = document.getElementById("fill");
+        var projectDiv = document.getElementById("projectDiv");
+        var backgroundGrey = document.getElementById("backgroundGrey");
+        var readMoreDiv = document.getElementById("readMoreDiv");
+
         fill.animate([
             // keyframes
             { transform: "translateY(" + (-fill.offsetHeight*2) + "px)" },
-            { transform: "translateY(" + screen.height + "px)" }
+            { transform: "translateY(" + (window.innerHeight+200) + "px)" }
             ], {
             // timing options
-            duration: 8000,
+            duration: 9000,
             iterations: Infinity
         });
         titleBackgroundMask.style.height = window.innerHeight + "px";
@@ -184,6 +245,54 @@
                 direction: "alternate",
                 delay: (Math.random()*-2000),
                 easing: "ease-in-out"
+            });
+        }
+        
+        function scaleBackgroundDivs() {
+            backgroundGrey.style.top = (projectDiv.offsetTop- 20) + "px";
+            backgroundGrey.style.height = (document.body.scrollHeight + 60 - (titleDiv.offsetTop + titleDiv.offsetHeight)) + "px";
+            readMoreDiv.style.top = (projectDiv.offsetTop- 20) + "px";
+            readMoreDiv.style.height = (projectDiv.offsetHeight + 50) + "px";
+            readMoreDiv.style.transform = "translateX(" + (-readMoreDiv.offsetWidth) + "px)";
+        }
+
+        window.addEventListener("resize", scaleBackgroundDivs);
+        scaleBackgroundDivs();
+
+        var readMoreTextArray = ["I got interested in the process of finding a <span class='txtYellow'>hamiltonian path</span> in a graph. After doing some experimentation, I got an idea of how to speed up this process using <span class='txtYellow'>articulation points</span>.  To test whether my method really worked or not I made this algorithm in python that uses my method to find a hamiltonian path on any <span class='txtYellow'>connected undirected graphs</span>. My method seem to work on all undirected connected graphs, and <span class='txtYellow'>significantly speeds up</span> the process of finding a hamiltonian path as compared to just trying all possible paths (See the GitHub project for an explanation of how my method works). This project taught me a lot about <span class='txtYellow'>graph theory</span> and about how to make complicated <span class='txtYellow'>recursive functions</span>.<br><br>Check out the <span class='txtYellow'>GitHub</span> page for this project: <a href='https://github.com/HenrikBOlafsen/HamiltonianPathAlgorithm' target='_blank'> https://github.com/HenrikBOlafsen/HamiltonianPathAlgorithm</a>",
+        "<span class='txtYellow'>Space Warper</span> is a game where you <span class='txtYellow'>warp space-time</span> and try to make colored blobs collide to create as many black holes as possible. The biggest challenge I faced while making this game was making the <span class='txtYellow'>physics of gravity</span> work well in an environment where something can move out of one edge and come back in from the opposite edge, effectively making the <span class='txtYellow'>space infinitely repeat in all directions</span>. It was also a challenge to make the effect of space-time warping look good and convincing. This project taught me a lot about instances of classes and prefabs and making the instances of different classes interact the way I wanted to with each other. And it also taught me about vectors, object references, game design and more.<br><br>Check out my game on the <span class='txtYellow'>Appstore-page</span>: <a href='https://apps.apple.com/no/app/space-warper/id1545170548' target='_blank'>https://apps.apple.com/no/app/space-warper/id1545170548</a>",
+        "<span class='txtYellow'>Fingers Down</span> is a strategy game on the <span class='txtYellow'>IOS-Appstore</span> where you can play against friends all around the world using the <span class='txtYellow'>multiplayer</span> feature or you can play against my trained <span class='txtYellow'>neural network</span> for the maximum challenge. This project was my first ever real programming project and taught me a lot. Like for example: how to make the host-server communicate with the clients and vise-versa, how to create, train and implement a deep neural network to play a turn-based strategy game, how to do 3d modeling, rigging and animations using blender3d, how to publish apps to the IOS-Appstore, how to structure a large project to keep the project easy to make changes to and maintain long-term, and a whole lot more.<br><br>Check out my game on the <span class='txtYellow'>Appstore-page</span>: <a href='https://apps.apple.com/no/app/fingers-down/id1441879023' target='_blank'>https://apps.apple.com/no/app/fingers-down/id1441879023</a>",
+        "The algorithm finds the <span class='txtYellow'>best moves</span> from <span class='txtYellow'>all game states</span> in any <span class='txtYellow'>turn based deterministic game with a game tree small enough to store all possible game states</span>. It gets printed and stored in the dict gameStatesBestMoves where each game state has a list of all the best moves from that game state. The algorithm also lets you know what game states <span class='txtYellow'>are a forced win, forced loss or a forced draw</span> (if both players play perfectly). This algorithm would work on games like <span class='txtYellow'>Tic-tac-toe, fingers down (chopsticks) and connect 4</span>. But it would not work for games with too large game trees like chess, go and pente. What makes this algorithm useful is its <span class='txtYellow'>ease of use and adaptability</span> to solve all sorts of small game trees.<br><br>Check out the <span class='txtYellow'>GitHub</span> page for this project: <a href='https://github.com/HenrikBOlafsen/StronglySolveGameTree' target='_blank'> https://github.com/HenrikBOlafsen/StronglySolveGameTree</a>"];
+
+        function readMore(projectIndex) {
+
+            readMoreText.innerHTML = readMoreTextArray[projectIndex];
+
+
+            readMoreDiv.animate([
+                // keyframes
+                { transform: "translateX(" + (-readMoreDiv.offsetWidth) + "px)" },
+                { transform: "translateX(0px)" }
+                ], {
+                // timing options
+                duration: 1000,
+                iterations: 1,
+                easing: "ease-in-out",
+                fill: "forwards"
+            });
+        }
+        
+        function closeReadMore() {
+            readMoreDiv.animate([
+                // keyframes
+                { transform: "translateX(0px)" },
+                { transform: "translateX(" + (-readMoreDiv.offsetWidth) + "px)" }
+                ], {
+                // timing options
+                duration: 1000,
+                iterations: 1,
+                easing: "ease-in-out",
+                fill: "forwards"
             });
         }
     </script>
